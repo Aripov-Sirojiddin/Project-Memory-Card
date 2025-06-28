@@ -4,22 +4,38 @@ import PokemonCard from "./components/PokemonCard/PokemonCard.jsx";
 import { useState } from "react";
 function App() {
   const [score, setScore] = useState(0);
+  const [cards, setCards] = useState([]);
 
-  function handleCardClick() {
-    console.log();
+  const size = 10;
+
+  let clickedPokemons = { size: 0 };
+
+  function handleCardClick(number) {
+    if (clickedPokemons[number] === undefined) {
+      clickedPokemons[number] = 1;
+      clickedPokemons.size++;
+      setScore((lastScore) => lastScore + 1);
+      console.log(clickedPokemons.size);
+      if (clickedPokemons.size === size) {
+        alert("You win!");
+      }
+    } else {
+      setScore(0);
+      clickedPokemons = { size: 0 };
+    }
   }
+
   function generateCards() {
     const pokemonCards = [];
     const pokemonIds = {};
-    const size = 10;
-    while(pokemonCards.length < size) {
+    while (pokemonCards.length < size) {
       const pokemonNumber = randomNumber(1, 1025);
       if (pokemonIds[pokemonNumber] !== 1) {
         pokemonCards.push(
           <PokemonCard
             key={pokemonNumber}
             pokemonNumber={pokemonNumber}
-            onClick={handleCardClick}
+            onClick={() => handleCardClick(pokemonNumber)}
           />
         );
         pokemonIds[pokemonNumber] = 1;
@@ -28,7 +44,9 @@ function App() {
     return pokemonCards;
   }
 
-  const pokemonCards = generateCards();
+  if (cards.length === 0) {
+    setCards(generateCards());
+  }
 
   return (
     <>
@@ -43,7 +61,7 @@ function App() {
         </div>
         <h1 style={{ marginInlineEnd: "3rem" }}>Score: {score}</h1>
       </div>
-      <div className="grid">{pokemonCards}</div>
+      <div className="grid">{cards}</div>
     </>
   );
 }
