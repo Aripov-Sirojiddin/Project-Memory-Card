@@ -13,12 +13,12 @@ h1 {
   justify-content: center;
   align-items: center;
   font-size: 1vw;
-  transition: all ease-in-out 0.1s;
+  transition: all ease-in-out 0.05s;
 }
 .container:hover {
   box-shadow: 10px 10px 20px rgb(129, 129, 129);
   transform: scale(1.1);
-  filter: brightness(1.3);
+  filter: brightness(1.15);
 }
 .pokemon_img {
   background: white;
