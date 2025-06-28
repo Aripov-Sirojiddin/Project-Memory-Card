@@ -22,9 +22,9 @@ export default function PokemonCard({ pokemonNumber }) {
     })(`https://pokeapi.co/api/v2/pokemon/${pokemonNumber}/`);
   }, []);
   return (
-    <>
+    <div className="container">
       <img src={imageUrl} alt={``} />
       <h1>{pokemonName}</h1>
-    </>
+    </div>
   );
 }
