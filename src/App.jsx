@@ -37,7 +37,7 @@ function App() {
 
   return (
     <>
-      {score == size && <RestartModal setScore={setScore} setCards={setCards} />}
+      {score == 10 && <RestartModal setScore={setScore} setCards={setCards} />}
       <div className="horizontal-container">
         <div className="horizontal-container">
           <img src="../pokemon-title.png" alt="" className="logo" />
