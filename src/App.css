@@ -10,6 +10,12 @@ html {
 
 @media screen and (max-width: 900px) {
   .grid {
+    grid-template-columns: repeat(4, auto);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .grid {
     grid-template-columns: repeat(3, auto);
   }
 }
