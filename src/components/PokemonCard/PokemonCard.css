@@ -3,6 +3,7 @@ h1 {
   margin-block: 0;
 }
 .container {
+  cursor: pointer;
   text-align: center;
   background: white;
   border-radius: 1rem;

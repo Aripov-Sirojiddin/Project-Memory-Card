@@ -1,8 +1,8 @@
 import "./PokemonCard.css";
-import randomNumber from "../../helpers/randomNumber.js";
 import { useEffect, useState } from "react";
 import capitalize from "../../helpers/capitalize.js";
-export default function PokemonCard({ pokemonNumber }) {
+
+export default function PokemonCard({ pokemonNumber, onClick }) {
   const [pokemonData, setPokemonData] = useState();
   const [speciesData, setSpeciesData] = useState();
 
@@ -48,7 +48,7 @@ export default function PokemonCard({ pokemonNumber }) {
     }
   }, [pokemonData]);
   return (
-    <div className="container">
+    <div className="container" onClick={onClick}>
       <img
         src={imageUrl}
         alt={``}

@@ -5,18 +5,31 @@ import { useState } from "react";
 function App() {
   const [score, setScore] = useState(0);
 
-  const pokemonCards = [];
-  const pokemonIds = {};
-
-  for (let i = 0; i < 10; i++) {
-    const pokemonNumber = randomNumber(1, 1025);
-    if (pokemonIds[pokemonNumber] !== 1) {
-      pokemonCards.push(
-        <PokemonCard key={pokemonNumber} pokemonNumber={pokemonNumber} />
-      );
-      pokemonIds[pokemonNumber] = 1;
-    }
+  function handleCardClick() {
+    console.log();
   }
+  function generateCards() {
+    const pokemonCards = [];
+    const pokemonIds = {};
+    const size = 10;
+    while(pokemonCards.length < size) {
+      const pokemonNumber = randomNumber(1, 1025);
+      if (pokemonIds[pokemonNumber] !== 1) {
+        pokemonCards.push(
+          <PokemonCard
+            key={pokemonNumber}
+            pokemonNumber={pokemonNumber}
+            onClick={handleCardClick}
+          />
+        );
+        pokemonIds[pokemonNumber] = 1;
+      }
+    }
+    return pokemonCards;
+  }
+
+  const pokemonCards = generateCards();
+
   return (
     <>
       <div className="horizontal-container">
