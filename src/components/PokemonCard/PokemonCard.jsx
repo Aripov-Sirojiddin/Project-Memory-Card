@@ -11,13 +11,9 @@ export default function PokemonCard({
 }) {
   const [pokemonData, setPokemonData] = useState();
   const [speciesData, setSpeciesData] = useState();
-  const [clickedPokemons, setClickedPokemons] = useState({ size: 0 });
+  const [clickedPokemons, setClickedPokemons] = useState({});
   const habitat =
     speciesData && speciesData.habitat ? speciesData.habitat.name : "grassland";
-  const flavorText =
-    speciesData && speciesData.flavor_text_entries
-      ? speciesData.flavor_text_entries[0].flavor_text
-      : "";
 
   const pokemonName = pokemonData ? capitalize(pokemonData.name) : "Loading...";
   const imageUrl = pokemonData
@@ -53,31 +49,23 @@ export default function PokemonCard({
       })(pokemonData.species.url);
     }
   }, [pokemonData]);
-
   function handleCardClick() {
-    console.log(pokemonNumber);
-    console.log(clickedPokemons);
-    console.log(clickedPokemons[pokemonNumber]);
     if (clickedPokemons[pokemonNumber] === undefined) {
-      setClickedPokemons((old) => {
-        return {
-          ...old,
-          size: old.size + 1,
-          [pokemonNumber]: 1,
-        };
+      setClickedPokemons({
+        ...clickedPokemons,
+        [pokemonNumber]: 1,
       });
-      setScore((lastScore) => lastScore + 1);
-      if (clickedPokemons.size === size) {
+      let score = 0;
+      setScore((lastScore) => {
+        score = lastScore + 1;
+        return lastScore + 1;
+      });
+      if (score == size) {
         alert("You win!");
       }
     } else {
-      console.log("Reset");
       setScore(0);
-      setClickedPokemons((old) => {
-        return {
-          size: 0,
-        };
-      });
+      setClickedPokemons({});
     }
     setCards((oldCards) => {
       const shuffle = shuffleArray(oldCards);
