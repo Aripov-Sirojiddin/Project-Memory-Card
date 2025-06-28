@@ -1,8 +1,14 @@
 import "./PokemonCard.css";
 import { useEffect, useState } from "react";
 import capitalize from "../../helpers/capitalize.js";
+import shuffleArray from "../../helpers/shuffleArray.js";
 
-export default function PokemonCard({ pokemonNumber, onClick }) {
+export default function PokemonCard({
+  size,
+  pokemonNumber,
+  setScore,
+  setCards,
+}) {
   const [pokemonData, setPokemonData] = useState();
   const [speciesData, setSpeciesData] = useState();
 
@@ -47,8 +53,28 @@ export default function PokemonCard({ pokemonNumber, onClick }) {
       })(pokemonData.species.url);
     }
   }, [pokemonData]);
+
+  let clickedPokemons = { size: 0 };
+  function handleCardClick() {
+    if (clickedPokemons[pokemonNumber] === undefined) {
+      clickedPokemons[pokemonNumber] = 1;
+      clickedPokemons.size++;
+      setScore((lastScore) => lastScore + 1);
+      if (clickedPokemons.size === size) {
+        alert("You win!");
+      }
+    } else {
+      setScore(0);
+      clickedPokemons = { size: 0 };
+    }
+    setCards((oldCards) => {
+      const shuffle = shuffleArray(oldCards);
+      return shuffle;
+    });
+  }
+
   return (
-    <div className="container" onClick={onClick}>
+    <div className="container" onClick={() => handleCardClick()}>
       <img
         src={imageUrl}
         alt={``}

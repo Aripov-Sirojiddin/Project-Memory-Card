@@ -2,28 +2,12 @@ import "./App.css";
 import randomNumber from "./helpers/randomNumber.js";
 import PokemonCard from "./components/PokemonCard/PokemonCard.jsx";
 import { useState } from "react";
+import shuffleArray from "./helpers/shuffleArray.js";
 function App() {
   const [score, setScore] = useState(0);
   const [cards, setCards] = useState([]);
 
   const size = 10;
-
-  let clickedPokemons = { size: 0 };
-
-  function handleCardClick(number) {
-    if (clickedPokemons[number] === undefined) {
-      clickedPokemons[number] = 1;
-      clickedPokemons.size++;
-      setScore((lastScore) => lastScore + 1);
-      console.log(clickedPokemons.size);
-      if (clickedPokemons.size === size) {
-        alert("You win!");
-      }
-    } else {
-      setScore(0);
-      clickedPokemons = { size: 0 };
-    }
-  }
 
   function generateCards() {
     const pokemonCards = [];
@@ -34,7 +18,10 @@ function App() {
         pokemonCards.push(
           <PokemonCard
             key={pokemonNumber}
+            size={size}
             pokemonNumber={pokemonNumber}
+            setScore={setScore}
+            setCards={setCards}
             onClick={() => handleCardClick(pokemonNumber)}
           />
         );
