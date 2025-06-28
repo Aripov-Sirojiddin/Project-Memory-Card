@@ -4,7 +4,6 @@ import capitalize from "../../helpers/capitalize.js";
 import shuffleArray from "../../helpers/shuffleArray.js";
 
 export default function PokemonCard({
-  size,
   pokemonNumber,
   setScore,
   setCards,
@@ -18,7 +17,7 @@ export default function PokemonCard({
   const pokemonName = pokemonData ? capitalize(pokemonData.name) : "Loading...";
   const imageUrl = pokemonData
     ? pokemonData.sprites.other["official-artwork"].front_default
-    : "../../../public/loading.svg";
+    : "../../../loading.svg";
 
   useEffect(() => {
     (async (url) => {
@@ -60,9 +59,6 @@ export default function PokemonCard({
         score = lastScore + 1;
         return lastScore + 1;
       });
-      if (score == size) {
-        alert("You win!");
-      }
     } else {
       setScore(0);
       setClickedPokemons({});
@@ -81,7 +77,7 @@ export default function PokemonCard({
         className="pokemon_img"
         style={{
           backgroundSize: "cover",
-          backgroundImage: `url("../../../public/habitats/${habitat}.png")`,
+          backgroundImage: `url("../../../habitats/${habitat}.png")`,
         }}
       />
       <h1>{pokemonName}</h1>

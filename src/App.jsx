@@ -2,7 +2,8 @@ import "./App.css";
 import randomNumber from "./helpers/randomNumber.js";
 import PokemonCard from "./components/PokemonCard/PokemonCard.jsx";
 import { useState } from "react";
-import shuffleArray from "./helpers/shuffleArray.js";
+import RestartModal from "./components/RestartModal/RestartModal.jsx";
+
 function App() {
   const [score, setScore] = useState(0);
   const [cards, setCards] = useState([]);
@@ -18,7 +19,6 @@ function App() {
         pokemonCards.push(
           <PokemonCard
             key={pokemonNumber}
-            size={size}
             pokemonNumber={pokemonNumber}
             setScore={setScore}
             setCards={setCards}
@@ -37,9 +37,10 @@ function App() {
 
   return (
     <>
+      {score == 2 && <RestartModal setScore={setScore} setCards={setCards} />}
       <div className="horizontal-container">
         <div className="horizontal-container">
-          <img src="../public/pokemon_icon.png" alt="" className="logo" />
+          <img src="../pokemon-title.png" alt="" className="logo" />
           <div>
             <h1 style={{ fontSize: "xx-large" }}>Memory Game!</h1>
             <p>Select all images without selecting the same one twice.</p>
