@@ -11,7 +11,7 @@ export default function PokemonCard({
 }) {
   const [pokemonData, setPokemonData] = useState();
   const [speciesData, setSpeciesData] = useState();
-
+  const [clickedPokemons, setClickedPokemons] = useState({ size: 0 });
   const habitat =
     speciesData && speciesData.habitat ? speciesData.habitat.name : "grassland";
   const flavorText =
@@ -54,18 +54,30 @@ export default function PokemonCard({
     }
   }, [pokemonData]);
 
-  let clickedPokemons = { size: 0 };
   function handleCardClick() {
+    console.log(pokemonNumber);
+    console.log(clickedPokemons);
+    console.log(clickedPokemons[pokemonNumber]);
     if (clickedPokemons[pokemonNumber] === undefined) {
-      clickedPokemons[pokemonNumber] = 1;
-      clickedPokemons.size++;
+      setClickedPokemons((old) => {
+        return {
+          ...old,
+          size: old.size + 1,
+          [pokemonNumber]: 1,
+        };
+      });
       setScore((lastScore) => lastScore + 1);
       if (clickedPokemons.size === size) {
         alert("You win!");
       }
     } else {
+      console.log("Reset");
       setScore(0);
-      clickedPokemons = { size: 0 };
+      setClickedPokemons((old) => {
+        return {
+          size: 0,
+        };
+      });
     }
     setCards((oldCards) => {
       const shuffle = shuffleArray(oldCards);
