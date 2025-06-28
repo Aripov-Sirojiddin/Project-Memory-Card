@@ -1,20 +1,17 @@
-img {
-  background: white;
-  border-radius: 1rem;
-  margin: 1rem;
-  object-fit: contain;
-  max-width: 15vw;
-}
-h1{
+h1 {
   font-size: 3vh;
+  margin-block: 0;
 }
 .container {
-  border: 1px black solid;
-  border-radius: 2rem;
+  border-radius: 1rem;
+  box-shadow: 5px 5px 10px rgb(200, 200, 200);
   margin: 1rem;
+  max-height: 45vh;
+  min-height: 45vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-size: 1vw;
 }
 
