@@ -3,11 +3,13 @@ h1 {
   margin-block: 0;
 }
 .container {
+  text-align: center;
+  background: white;
   border-radius: 1rem;
   box-shadow: 5px 5px 10px rgb(200, 200, 200);
   margin: 1rem;
-  max-height: 45vh;
-  min-height: 45vh;
+  max-height: 40vh;
+  min-height: 40vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
