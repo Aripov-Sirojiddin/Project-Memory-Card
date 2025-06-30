@@ -10,7 +10,7 @@ function App() {
   const [cards, setCards] = useState([]);
 
   const size = 10;
-  
+
   useEffect(() => {
     setCards((oldCards) => {
       const shuffle = shuffleArray(oldCards);
@@ -28,10 +28,7 @@ function App() {
           <PokemonCard
             key={pokemonNumber}
             pokemonNumber={pokemonNumber}
-            score={score}
             setScore={setScore}
-            setCards={setCards}
-            onClick={() => handleCardClick(pokemonNumber)}
           />
         );
         pokemonIds[pokemonNumber] = 1;
