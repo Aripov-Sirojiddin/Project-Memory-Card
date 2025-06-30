@@ -1,7 +1,7 @@
 import "./RestartModal.css";
 export default function RestartModal({ setScore, setCards }) {
   function handleClose() {
-    setScore(0);
+    setScore(new Set());
     setCards([]);
   }
   return (

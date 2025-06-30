@@ -1,14 +1,22 @@
 import "./App.css";
 import randomNumber from "./helpers/randomNumber.js";
 import PokemonCard from "./components/PokemonCard/PokemonCard.jsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import RestartModal from "./components/RestartModal/RestartModal.jsx";
+import shuffleArray from "./helpers/shuffleArray.js";
 
 function App() {
-  const [score, setScore] = useState(0);
+  const [score, setScore] = useState(new Set());
   const [cards, setCards] = useState([]);
 
   const size = 10;
+  
+  useEffect(() => {
+    setCards((oldCards) => {
+      const shuffle = shuffleArray(oldCards);
+      return shuffle;
+    });
+  }, [score]);
 
   function generateCards() {
     const pokemonCards = [];
@@ -20,6 +28,7 @@ function App() {
           <PokemonCard
             key={pokemonNumber}
             pokemonNumber={pokemonNumber}
+            score={score}
             setScore={setScore}
             setCards={setCards}
             onClick={() => handleCardClick(pokemonNumber)}
@@ -37,7 +46,9 @@ function App() {
 
   return (
     <>
-      {score == 10 && <RestartModal setScore={setScore} setCards={setCards} />}
+      {score.size == 10 && (
+        <RestartModal setScore={setScore} setCards={setCards} />
+      )}
       <div className="horizontal-container">
         <div className="horizontal-container">
           <img src="../pokemon-title.png" alt="" className="logo" />
@@ -47,7 +58,7 @@ function App() {
             <p>Once you've selected all the images you win!</p>
           </div>
         </div>
-        <h1 style={{ marginInlineEnd: "3rem" }}>Score: {score}</h1>
+        <h1 style={{ marginInlineEnd: "3rem" }}>Score: {score.size}</h1>
       </div>
       <div className="grid">{cards}</div>
     </>

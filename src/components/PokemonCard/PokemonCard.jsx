@@ -5,12 +5,13 @@ import shuffleArray from "../../helpers/shuffleArray.js";
 
 export default function PokemonCard({
   pokemonNumber,
+  score,
   setScore,
   setCards,
 }) {
   const [pokemonData, setPokemonData] = useState();
   const [speciesData, setSpeciesData] = useState();
-  const [clickedPokemons, setClickedPokemons] = useState({});
+
   const habitat =
     speciesData && speciesData.habitat ? speciesData.habitat.name : "grassland";
 
@@ -48,24 +49,16 @@ export default function PokemonCard({
       })(pokemonData.species.url);
     }
   }, [pokemonData]);
+
   function handleCardClick() {
-    if (clickedPokemons[pokemonNumber] === undefined) {
-      setClickedPokemons({
-        ...clickedPokemons,
-        [pokemonNumber]: 1,
-      });
-      let score = 0;
-      setScore((lastScore) => {
-        score = lastScore + 1;
-        return lastScore + 1;
-      });
-    } else {
-      setScore(0);
-      setClickedPokemons({});
-    }
-    setCards((oldCards) => {
-      const shuffle = shuffleArray(oldCards);
-      return shuffle;
+    setScore((lastSet) => {
+      const newSet = new Set(lastSet);
+      if (!newSet.has(Number(pokemonNumber))) {
+        newSet.add(Number(pokemonNumber));
+        return newSet;
+      } else {
+        return new Set();
+      }
     });
   }
 
